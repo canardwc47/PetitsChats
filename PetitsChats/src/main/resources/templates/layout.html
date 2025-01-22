@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)" >
+
+<head>
+  <meta charset="UTF-8">
+  <title data-th-replace="${title}"></title>
+  <link rel="stylesheet" data-th-href="@{/css/chat.css}">
+</head>
+
+<body>
+<header>
+  <h1>La maison des chats </h1>
+
+  <nav>
+    <ul>
+
+      <li><a href="/liste" > Liste des chats</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/creer">Creer</a></li>
+      <li><a href="/login">Connexion</a></li>
+
+    </ul>
+
+  </nav>
+  <div class="gatitos"></div>
+</header>
+
+<main data-th-replace="${main}"> </main>
+
+</body>
+</html>
+
+<form  data-th-fragment="chatform(readonly)">
+  <h1 data-th-text="${chat.name}"></h1>
+  <ul class="flex-outer">
+    <li>
+      <label for="inputName"> Nom : </label>
+      <input type="text" id="inputName"  disabled data-th-value="${chat.name}"/>
+    </li>
+    <li>
+      <label for="inputColor"> Couleur : </label>
+      <input type="text" id="inputColor" disabled data-th-value="${chat.color}"/>
+    </li>
+
+  </ul>
+</form>
+

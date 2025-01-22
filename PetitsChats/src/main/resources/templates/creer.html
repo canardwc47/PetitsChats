@@ -1,0 +1,29 @@
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
+
+
+
+<title>Creer Chat</title>
+
+
+<main>
+<div class="creer">
+    <form data-th-object="${chat}" method="post" data-th-action="creer" data-th-fragment="chatform(readonly)">
+        <h1 data-th-text="${chat.name}"></h1>
+        <ul class="flex-outer">
+            <li>
+                <label for="inputName"> Nom : </label>
+                <input type="text" id="inputName"  data-th-field="*{name}"/>
+            </li>
+            <li>
+                <label for="inputColor"> Couleur : </label>
+                <input type="text" id="inputColor"  data-th-field="*{color}"/>
+            </li>
+
+        </ul>
+        <button>Enregistrer</button>
+
+    </form>
+</div>
+</main>
+
+</html>

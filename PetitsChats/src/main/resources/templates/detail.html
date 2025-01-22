@@ -1,0 +1,16 @@
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
+
+    <title data-th-text="${chat.name}"></title>
+
+
+<main>
+    <div class="detMod">
+    <form data-th-replace="~{layout::chatform(readonly)}">
+    </form>
+
+
+    </div>
+</main>
+
+
+</html>

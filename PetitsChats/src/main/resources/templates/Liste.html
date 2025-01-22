@@ -1,0 +1,33 @@
+<html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
+
+<title>Liste des chats</title>
+
+<main>
+
+<div class="liste">
+<table>
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>Color</th>
+    <th>Action</th>
+
+  </tr>
+  </thead>
+  <tbody >
+  <tr data-th-each = "c: ${chats}">
+    <td  data-th-text="${c.name}"> </td>
+    <td data-th-text="${c.color}"></td>
+    <td ><span class="action"> <a th:href="@{/detail(id=${c.id})}" >Detail</a>
+      <a th:href="@{/modifier(id=${c.id})}" >Modifier</a>
+      <form method="post"  th:action="@{/delete}" style="display:inline;" >
+        <input type="hidden" name="id" th:value="${c.id}">
+      <button type="submit" class="link-button" >Supprimer</button>
+      </form>  </span>
+  </tbody>
+
+</table>
+</div>
+</main>
+
+</html>
