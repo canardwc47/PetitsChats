@@ -1,26 +1,35 @@
 <html data-th-replace="~{layout::layout(title=~{::title}, main=~{::main})}">
 
 <main>
-
-
-<head>
-    <title>Please Log In</title>
-</head>
-<body>
-<h1>Please Log In</h1>
-<div th:if="${param.error}">
-    Invalid username and password.</div>
-<div th:if="${param.logout}">
-    You have been logged out.</div>
-<form th:action="@{/login}" method="post">
-    <div>
-        <input type="text" name="username" placeholder="Username"/>
+    <head>
+        <title>Please Log In</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+    <h1>Please Log In</h1>
+    <div class="detMod">
+        <div th:if="${param.error}" class="error-message">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}" class="logout-message">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post">
+            <ul>
+                <li>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" />
+                </li>
+                <li>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" />
+                </li>
+                <li>
+                    <button type="submit">Connexion</button>
+                </li>
+            </ul>
+        </form>
     </div>
-    <div>
-        <input type="password" name="password" placeholder="Password"/>
-    </div>
-    <input type="submit" value="Log in" />
-</form>
-</body>
+    </body>
 </main>
 </html>

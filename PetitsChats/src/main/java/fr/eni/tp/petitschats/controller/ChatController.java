@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 
 @Controller
+@SessionAttributes("membreSession")
 
 public class ChatController {
 
