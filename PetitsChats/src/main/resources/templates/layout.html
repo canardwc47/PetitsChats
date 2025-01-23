@@ -17,8 +17,12 @@
       <li><a href="/liste" > Liste des chats</a></li>
       <li><a href="/">Home</a></li>
       <li><a href="/creer">Creer</a></li>
-      <li data-th-if="${membreSession != null}"><a href="/login">Connexion</a></li>
-      <li data-th-if="${membreSession == null}"><a href="/logout">Deconnexion</a></li>
+      <li data-th-if="${!#authorization.expression('isAuthenticated()')}">
+        <a href="/login">Se connecter</a>
+      </li>
+      <li data-th-if="${#authorization.expression('isAuthenticated()')}">
+        <a href="/logout" >Se deconnecter</a>
+      </li>
     </ul>
 
   </nav>

@@ -1,5 +1,7 @@
 package fr.eni.tp.petitschats.configuration;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -17,6 +20,7 @@ import javax.sql.DataSource;
 @Configuration
 
 public class SecurityConfiguration {
+    protected final Log logger = LogFactory.getLog(getClass());
 
     @Bean
     UserDetailsManager userDetailsManager(DataSource dataSource) {
@@ -60,15 +64,20 @@ public class SecurityConfiguration {
 
 
         //formulaire de connexion par défaut
-        http.formLogin(form -> form
-                .loginPage("/login")
-
-                .permitAll()
-        )
+        http
+                .csrf(Customizer.withDefaults())
+                .cors(Customizer.withDefaults())
+                .formLogin(f ->
+                        f.loginPage("/login")
+                                .permitAll()
+                )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/")
-                );
+                        .permitAll());
 
         return http.build();
 
